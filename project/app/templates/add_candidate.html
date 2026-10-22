@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html><head><title>Add Candidate</title></head>
+<body>
+<style>
+    form {
+        text-align: center;
+        background-color: aqua;
+        border: 20px  solid black;
+        padding: 20px;
+        color: red;
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        align-content: center;
+    }
+    
+</style>
+<form method="POST">
+    <h1>Add Candidate</h1>
+    {% csrf_token %}
+
+    {{form.as_div}}
+    <button type="submit">Add Candidate</button>
+</form>
+</style>
+</body>
+</html>

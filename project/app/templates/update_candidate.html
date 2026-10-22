@@ -1,0 +1,7 @@
+<form method="post">
+    {% csrf_token %}
+
+    {{form.as_div}}
+    <button type="submit">Update Candidate</button>
+    <a href="{% url 'view_candidate' %}"><button type="button">Back</button></a>
+</form>

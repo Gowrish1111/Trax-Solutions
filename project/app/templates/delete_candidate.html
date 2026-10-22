@@ -1,0 +1,37 @@
+<html> <head><title>
+    Candidate List</title></head> 
+    <body> <h2>Candidate List</h2>
+        <a href="{% url 'add_candidate'%}">
+        <button type="button">Add Candidate </button></a>
+     <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+        <th>Name</  th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Enrolled Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+    <tbody>
+        {% for candidate in candidates %}
+        <tr>
+            <td>{{ candidate.name }}</td>
+            <td>{{ candidate.email }}</td>
+            <td>{{ candidate.age }}</td>
+            <td>{{ candidate.enrolled_date }}</td>
+            <td>{{ candidate.status }}</td>
+            <td>
+                <a href="{% url 'Edit_candidate' candidate.pk %}"><button type="button">Edit</button></a>
+                <a href="{% url 'delete_candidate' candidate.pk %}"><button type="button">Delete</button></a>
+            </td>
+        </tr>
+        <tr>{% empty %}
+
+            <td colspan="6">No candidates available.</td>
+
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>

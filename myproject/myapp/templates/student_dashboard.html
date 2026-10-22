@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .student-details {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px #ccc;
+        }
+
+        .student-details h2 {
+            margin-top: 0;
+        }
+
+        .cards {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            width: 30%;
+            min-height: 150px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px #ccc;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .card p {
+            margin: 8px 0;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .courses {
+            background: #3498db;
+            color: white;
+        }
+
+        .logout {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Student Dashboard</h1>
+        <p>Welcome, {{ student.name }}</p>
+    </div>
+
+    <div class="container">
+
+        {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+        {% else %}
+
+            <!-- Student Details -->
+
+            <div class="student-details">
+
+                <h2>Student Details</h2>
+
+                <p>
+                    <b>Name:</b>
+                    {{ student.name }}
+                </p>
+
+                <p>
+                    <b>Email:</b>
+                    {{ student.email }}
+                </p>
+
+                <p>
+                    <b>Age:</b>
+                    {{ student.age }}
+                </p>
+
+            </div>
+
+
+            <!-- Dashboard Cards -->
+
+            <div class="cards">
+
+                <!-- Courses -->
+
+                <div class="card">
+
+                    <h3>My Courses</h3>
+
+                    {% for enrollment in enrollments %}
+
+                        <p>
+                            {{ enrollment.course.course_name }}
+                        </p>
+
+                        <p>
+                            Trainer:
+                            {{ enrollment.course.trainer.Trainer_name }}
+                        </p>
+
+                    {% empty %}
+
+                        <p>No courses enrolled.</p>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Assessments -->
+
+                <div class="card">
+
+                    <h3>My Assessments</h3>
+
+                    {% for grade in grades %}
+
+                        <p>
+                            {{ grade.assessment.title }}
+                        </p>
+
+                    {% empty %}
+
+                        <p>No assessments available.</p>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Grades -->
+
+                <div class="card">
+
+                    <h3>My Grades</h3>
+
+                    {% for grade in grades %}
+
+                        <p>
+                            {{ grade.assessment.title }} :
+                            {{ grade.score }}
+                        </p>
+
+                    {% empty %}
+
+                        <p>No grades available.</p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="buttons">
+
+                <button
+                    class="courses"
+                    onclick="window.location.href='/api/view-list/'">
+                    View Courses
+                </button>
+
+                <button
+                    class="logout"
+                    onclick="window.location.href='/api/login-page/'">
+                    Logout
+                </button>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
+
